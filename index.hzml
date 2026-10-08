@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikácia</title>
+    <style>
+        html, body { 
+            margin: 0; 
+            padding: 0; 
+            width: 100%; 
+            height: 100%; 
+            overflow: hidden; 
+            font-family: Arial, sans-serif;
+        }
+
+        iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: none; 
+        }
+
+        .vlastne-tlacidlo {
+            position: fixed;
+            bottom: 20px;
+            right: 200px;
+            z-index: 9999;
+            
+            background-color: #000000;
+            color: #ffffff;
+            
+            padding: 12px 50px;
+            min-width: 200px;
+            text-align: center;
+            
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+
+        .vlastne-tlacidlo:hover {
+            background-color: #222222;
+        }
+    </style>
+</head>
+<body>
+
+    <iframe 
+        id="mojIframe" 
+        src=""
+        allow="microphone *; camera *; autoplay *"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation">
+    </iframe>
+
+    <button onclick="otvorDiscordIntegration()" class="vlastne-tlacidlo">
+        Made tK1
+    </button>
+
+    <script>
+        const BOLT_BASE_URL = "alvero.bolt.host";
+
+        // Prečíta cestu napísanú v prehliadači (napr. "/anglina")
+        const currentPath = window.location.pathname + window.location.search + window.location.hash;
+
+        const iframeElement = document.getElementById('mojIframe');
+        
+        // Načíta Bolt aplikáciu aj s danou podstránkou
+        iframeElement.src = BOLT_BASE_URL + currentPath;
+
+        function otvorDiscordIntegration() {
+            const targetUrl = 'https://discord-webhook-inte-ia31.bolt.host/';
+            try {
+                iframeElement.contentWindow.location.replace(targetUrl);
+            } catch (e) {
+                iframeElement.src = targetUrl;
+            }
+        }
+    </script>
+
+</body>
+</html>
